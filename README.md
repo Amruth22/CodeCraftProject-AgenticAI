@@ -220,12 +220,12 @@ CodeCraftProject-AgenticAI/
 ├── data/                      # Sample data and resources
 │   ├── csv_files/
 │   └── resources/
-├── tests/                     # Integration tests
-│   └── test_integration.py    # 10 test cases (2 real API + 8 mocked)
 ├── main.py                    # Streamlit application
 ├── graph.py                   # LangGraph workflow
 ├── state.py                   # State schema (TypedDict)
-└── installation.txt           # Python dependencies
+├── tests.py                   # Integration tests (10 tests: 2 real API + 8 mocked)
+├── installation.txt           # Python dependencies
+└── .env                       # Environment variables (API keys)
 ```
 
 ## 📁 Output Structure
@@ -349,7 +349,7 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 The project includes 10 integration tests (2 with real Gemini API, 8 mocked):
 
 ```bash
-pytest tests/
+pytest tests.py -v
 ```
 
 **Test Coverage:**
