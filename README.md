@@ -165,7 +165,7 @@ class CodeCrafterState(TypedDict):
 ### Programmatic Usage
 
 ```python
-from workflow.workflow import run_all_agents
+from graph import run_all_agents
 
 # Generate microservices programmatically
 result = run_all_agents(
@@ -174,9 +174,9 @@ result = run_all_agents(
 )
 
 # Access generated code
-services = result["service_outputs"]
-swagger_docs = result["swagger_outputs"]
-tests = result["test_outputs"]
+services = result["code_output"]
+swagger_docs = result["swagger_output"]
+tests = result["test_output"]
 ```
 
 ## ⚙️ Configuration
@@ -204,6 +204,28 @@ model = ChatGoogleGenerativeAI(
     google_api_key=os.getenv("GEMINI_API_KEY_1"),
     temperature=0.1  # Lower temperature for more consistent code generation
 )
+```
+
+## 📁 Project Structure
+
+```
+CodeCraftProject-AgenticAI/
+├── agents/                    # AI agents for generation
+│   ├── planning_agent.py      # Architecture planning
+│   ├── codegen_agent.py       # Code generation
+│   ├── swagger_agent.py       # API documentation
+│   └── test_agent.py          # Test generation
+├── nodes/                     # LangGraph node implementations
+├── utils/                     # Utility functions
+├── data/                      # Sample data and resources
+│   ├── csv_files/
+│   └── resources/
+├── tests/                     # Integration tests
+│   └── test_integration.py    # 10 test cases (2 real API + 8 mocked)
+├── main.py                    # Streamlit application
+├── graph.py                   # LangGraph workflow
+├── state.py                   # State schema (TypedDict)
+└── installation.txt           # Python dependencies
 ```
 
 ## 📁 Output Structure
@@ -324,9 +346,18 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 
 ### Running Tests
 
+The project includes 10 integration tests (2 with real Gemini API, 8 mocked):
+
 ```bash
 pytest tests/
 ```
+
+**Test Coverage:**
+- Test 1: Planning Agent (Real API call)
+- Test 2: Code Generation (Real API call)
+- Test 3-10: Swagger, Testing, State Management, Multi-language, Error Handling, etc. (Mocked)
+
+All tests designed to save API quota while ensuring functionality.
 
 ## 📝 License
 
