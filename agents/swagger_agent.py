@@ -5,7 +5,7 @@ from typing import Dict, Any
 from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
-from state.state import CodeCrafterState, get_file_extension
+from state import CodeCrafterState, get_file_extension
 
 load_dotenv()
 

@@ -2,7 +2,7 @@ import os
 import re
 import json
 import streamlit as st
-from workflow.workflow import run_all_agents
+from graph import run_all_agents
 
 def slugify(text: str) -> str:
     text = re.sub(r"[^a-zA-Z0-9]+", "_", text.strip().lower())
