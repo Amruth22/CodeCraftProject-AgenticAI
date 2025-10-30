@@ -55,27 +55,56 @@ Only return JSON in this format:
         try:
             # Create a HumanMessage with the prompt
             message = HumanMessage(content=prompt)
-            
+
             # Generate the response
             response = model.invoke([message])
-            
+
             # Extract the text from the response
             raw_text = response.content.strip()
-            
-            # Clean the response
+
+            # Clean the response - remove markdown code blocks
             raw_text = raw_text.strip("```json").strip("```").strip()
-            
-            # Parse JSON
-            parsed = json.loads(raw_text)
-            
+            if raw_text.startswith("```"):
+                raw_text = raw_text.split("```")[1].strip()
+
+            # Try to find JSON in the response
+            import re
+            json_match = re.search(r'\{.*\}', raw_text, re.DOTALL)
+            if json_match:
+                raw_text = json_match.group(0)
+
+            # Parse JSON with better error handling
+            try:
+                parsed = json.loads(raw_text)
+            except json.JSONDecodeError:
+                # If JSON parsing fails, create a minimal valid structure
+                parsed = {
+                    "controller_filename": f"{service}_controller.py",
+                    "controller_code": "# Controller code generation failed",
+                    "service_filename": f"{service}_service.py",
+                    "service_code": "# Service code generation failed",
+                    "model_filename": f"{service}_model.py",
+                    "model_code": "# Model code generation failed"
+                }
+
             # Add language info for file extension determination
             parsed["language"] = state["language"]
-            
+
             service_files[service] = parsed
-            
+
         except Exception as e:
             error_msg = f"[CodeGen Error for {service}] {e}"
             print(error_msg)
+            # Still add a minimal structure so workflow continues
+            service_files[service] = {
+                "controller_filename": f"{service}_controller.py",
+                "controller_code": "# Error in code generation",
+                "service_filename": f"{service}_service.py",
+                "service_code": "# Error in code generation",
+                "model_filename": f"{service}_model.py",
+                "model_code": "# Error in code generation",
+                "language": state["language"]
+            }
             continue
 
     updated_state = {
