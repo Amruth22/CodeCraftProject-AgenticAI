@@ -359,34 +359,6 @@ pytest tests/
 
 All tests designed to save API quota while ensuring functionality.
 
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **Google Gemini** for powerful AI capabilities
-- **LangGraph** for multi-agent orchestration
-- **Streamlit** for the intuitive web interface
-- **LangChain** for AI application framework
-
-## 📞 Support
-
-- **Issues**: [GitHub Issues](https://github.com/Amruth22/CodeCraftProject-AgenticAI/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/Amruth22/CodeCraftProject-AgenticAI/discussions)
-- **Email**: [Contact the maintainer](mailto:your-email@example.com)
-
-## 🗺️ Roadmap
-
-- [ ] Support for more programming languages (Rust, Scala)
-- [ ] Integration with cloud platforms (AWS, GCP, Azure)
-- [ ] Docker containerization support
-- [ ] CI/CD pipeline generation
-- [ ] Database migration scripts
-- [ ] Monitoring and logging setup
-- [ ] Security best practices integration
-- [ ] Performance optimization suggestions
-
 ---
 
 **Made with ❤️ by the CodeCrafter AI team**
