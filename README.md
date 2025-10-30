@@ -360,7 +360,3 @@ pytest tests/
 All tests designed to save API quota while ensuring functionality.
 
 ---
-
-**Made with ❤️ by the CodeCrafter AI team**
-
-*Transform your ideas into production-ready microservices in minutes, not days.*
